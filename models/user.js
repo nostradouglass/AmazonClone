@@ -10,7 +10,7 @@ var UserSchema = new mongoose.Schema({
 
     profile: {
         name: { type: String, default: '' },
-        picture{ type: String, default: '' }
+        picture: { type: String, default: '' }
     },
 
     address: String,
@@ -24,7 +24,7 @@ var UserSchema = new mongoose.Schema({
 
 
 // Hash the password before is is saved to database
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function(next) {
     var user = this;
     if (!user.isModified('password')) return next();
     bcrypt.genSalt(10, (err, salt) => {
